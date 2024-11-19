@@ -1,5 +1,159 @@
+/* Marka images */
+
+/* Default: Full responsiveness for all screen sizes */
+.brand-img {
+	max-width: 100%; /* Ensures image does not exceed its container */
+	height: auto; /* Maintains aspect ratio */
+	display: block; /* Ensures proper centering */
+	margin: 0 auto; /* Centers the image horizontally */
+}
+
+/* Larger screens (e.g., desktops) */
+@media (min-width: 1140px) {
+	.brand-img {
+		max-width: 75%; /* Adjust the size for larger screens */
+	}
+}
+
+/* Medium screens (e.g., tablets) */
+@media (min-width: 768px) and (max-width: 1199px) {
+	.brand-img {
+		max-width: 60%; /* Slightly smaller on medium screens */
+	}
+}
 
 
+/* Text justify*/
+
+.justify-text {
+    text-align: justify;
+}
+
+/* About Timeline */
+
+.timeline-container {
+    /* font-family: */
+    text-align: center;
+    margin: 20px auto;
+    width: 100%;
+}
+
+/* Horizontal Timeline Styling */
+#timeline {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 25px;
+}
+
+#timeline li {
+    position: relative;
+    flex: 1;
+    text-align: center;
+	transition: transform 0.3s ease, font-size 0.3s ease;
+}
+
+
+#timeline li a {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #136182;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth color and scale transition */
+}
+
+
+
+
+#timeline li.active a {
+    background-color: #017570;
+    color: #ffffff;
+    transform: scale(1.2); /* Make the active year larger */
+    font-size: 20px; /* Slightly larger font size */
+    z-index: 1; /* Bring the active year to the front */
+}
+
+
+/* Styling for non-active years */
+#timeline li:not(.active) a {
+    opacity: 0.7; /* Reduce opacity for non-active years */
+    transform: scale(0.9); /* Make non-active years slightly smaller */
+}
+
+.hidden {
+    display: none;
+}
+
+#timeline_content > div ul {
+    margin-top: 20px; 
+    font-size: 14px; 
+    list-style-type: disc; 
+    padding-left: 40px; 
+}
+
+/* Responsive Styles */
+
+/* For screens smaller than 1043px */
+@media (max-width: 1043px) {
+    #timeline {
+        flex-wrap: wrap; /* Allows items to wrap into multiple rows */
+    }
+
+    #timeline li {
+        flex: 1 1 30%; /* Items take up 30% of the row width */
+        margin: 5px; /* Add spacing between items */
+    }
+
+    #timeline li a {
+        font-size: 18px; /* Reduce font size for smaller screens */
+        padding: 8px 10px; /* Adjust padding for better fit */
+    }
+}
+
+/* For screens smaller than 768px (mobile devices) */
+@media (max-width: 768px) {
+    #timeline {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center-align items */
+    }
+
+    #timeline li {
+        flex: 1 1 auto; /* Items take full width */
+        width: 100%; /* Ensure links span the container */
+        margin: 10px 0; /* Add vertical spacing */
+    }
+
+    #timeline li a {
+        font-size: 16x; /* Smaller font size for mobile */
+        padding: 10px 12px; /* Adjust padding for better usability */
+    }
+
+    .timeline-container h2 {
+        font-size: 20px; /* Slightly smaller heading */
+    }
+}
+
+/* For screens smaller than 480px (very small phones) */
+@media (max-width: 480px) {
+    #timeline li a {
+        font-size: 14px; /* Reduce font size further for very small screens */
+        padding: 8px 10px;
+    }
+
+    .timeline-container h2 {
+        font-size: 18px; /* Reduce heading size for small screens */
+    }
+}
+
+.custom-text-size-1 {
+	font-size: 14px;;
+}
 
 /* Custom Hero Row */
 .custom-hero-row {
