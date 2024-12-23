@@ -49,7 +49,7 @@
 	</head>
 	<body data-plugin-page-transition>
 
-		<div class="body">
+		<div class="body bg-color-grey">
 			<header id="header" class="header-transparent" data-plugin-options="{'stickyScrollUp': true, 'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': true, 'stickyStartAt': 1, 'stickyHeaderContainerHeight': 72}">	
 				<div class="header-body border-top-0 h-auto box-shadow-none">
 					
@@ -207,7 +207,16 @@
                                         <div class="row">
                                             <div class="form-group col">
                                                 <label class="form-label required mb-1 text-2">İlgilendiğiniz Posizyon</label>
-                                                <input type="text" value="" data-msg-required="Lütfen İlgilendiğiniz Posizyonu Giriniz" maxlength="100" class="form-control text-3 h-auto py-2" name="subject" required>
+                                                <!-- <input type="text" value="" data-msg-required="Lütfen İlgilendiğiniz Posizyonu Giriniz" maxlength="100" class="form-control text-3 h-auto py-2" name="subject" required>
+												<option value="" disabled selected hidden>Lütfen Bir Seçenek Seçin</option> -->
+												<select class="form-select form-control h-auto py-2" data-msg-required="Lütfen İletişim Sebebini Seçiniz" name="subject" id="subject" required> 
+													<option value="" disabled selected hidden>Lütfen Bir Seçenek Seçin</option>
+													<option value="Option 1">Genel Başvuru</option>
+													<!-- <option value="Option 4">Kariyer Başvurusu</option> -->
+													<!-- <option value="Option 2">Geri Bildirim</option> -->
+													<option value="Option 3">İnsan Kaynakları (IK)</option>
+													<option value="Option 4">IT</option>
+												</select>
                                             </div>
                                         </div>  
                                         <div class="row">
