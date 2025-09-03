@@ -161,10 +161,10 @@
 										<button class="btn header-btn-collapse-nav" data-bs-toggle="collapse" data-bs-target=".header-nav-main nav">
 											<i class="fas fa-bars"></i>
 										</button> -->
-										<!-- <a class="btn btn-primary font-weight-semibold text-3 py-lg-3 btn-gradient text-quaternary anim-hover-translate-top-5px transition-2ms ms-4" href="iletisim.html" ><span class="px-lg-4 d-block ws-nowrap">İletişim</span></a>
+										<!-- <a class="btn btn-primary font-weight-semibold text-3 py-lg-3 btn-gradient text-quaternary anim-hover-translate-top-5px transition-2ms ms-4" href="iletisim.html" ><span class="px-lg-4 d-block ws-nowrap">İletişim</span></a> -->
 										<button class="btn header-btn-collapse-nav" data-bs-toggle="collapse" data-bs-target=".header-nav-main nav">
 											<i class="fas fa-bars"></i>
-										</button> -->
+										</button>
 									</div>
 									
 								</div>
@@ -267,49 +267,60 @@
                                         <strong>Hata!</strong> Bir hata oluştu, lütfen sonra tekrar deneyiniz.
                                         <span class="mail-error-message text-1 d-block"></span>
                                     </div>
+									
+									<!-- Honeypot (botlara görünür, kullanıcıya görünmez)
+          							<input type="text" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;"> -->
+
 
                                     <div class="row">
                                         <div class="form-group col-lg-6">
                                             <label class="form-label mb-1 text-2">Ad ve Soyadınız</label>
-                                            <input type="text" value="" data-msg-required="Lütfen Ad ve Soyadınızı Giriniz" maxlength="100" class="form-control text-3 h-auto py-2" name="name" required>
+                                            <input type="text" value="" data-msg-required="Lütfen Ad ve Soyadınızı Giriniz" maxlength="100" class="form-control text-3 h-auto py-2" name="name" placeholder="Ad ve Soyad" required>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <label class="form-label mb-1 text-2">Email Adresi</label>
-                                            <input type="email" value="" data-msg-required="Lütfen Email Adresini Giriniz" data-msg-email="Please enter a valid email address." maxlength="100" class="form-control text-3 h-auto py-2" name="email" required>
+                                            <input type="email" value="" data-msg-required="Lütfen Email Adresini Giriniz" data-msg-email="Lütfen geçerli bir e-posta adresi giriniz." maxlength="100" class="form-control text-3 h-auto py-2" name="email" placeholder = "E-posta adresi" required>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-md-6">
                                             <label class="form-label mb-1 text-2">Bizimle İletişime Geçme Sebebiniz</label>
                                             <!-- <select data-msg-required="Lütfen İletişim Sebebini Seçiniz" class="form-control text-3 h-auto py-2" name="subject" id="subject" required> -->
 											<select class="form-select form-control h-auto py-2" data-msg-required="Lütfen İletişim Sebebini Seçiniz" name="subject" id="subject" required>    
 												<option value="" disabled selected hidden>Lütfen Bir Seçenek Seçin</option>
-                                                <option value="Option 1">Genel Bilgi Talebi</option>
+                                                <option value="Genel Bilgi Talebi">Genel Bilgi Talebi</option>
                                                 <!-- <option value="Option 4">Kariyer Başvurusu</option> -->
-                                                <option value="Option 2">Geri Bildirim</option>
-                                                <option value="Option 3">Ortaklık/İş Birliği</option>
-                                                <option value="Option 4">Diğer</option>
+                                                <option value="Geri Bildirim">Geri Bildirim</option>
+                                                <option value="Ortaklık/İş Birliği">Ortaklık/İş Birliği</option>
+                                                <option value="Diğer">Diğer</option>
                                             </select>
                                         </div>
+										<div class="form-group col-md-6">
+											<label class="form-label mb-1 text-2">Telefon Numaranız</label>
+											<input type="tel" name="telefon" maxlength="20" class="form-control text-3 h-auto py-2" placeholder="05xx xxx xx xx"  pattern="^0[0-9]{10}$" inputmode="numeric"  oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+										</div>
                                     </div>
+
+
                                     <div class="form-group col-md-6">
 										<p class="mb-2">İletişim Tercihiniz</p>
+
 										<div class="form-check form-check-inline">
-											<label class="form-check-label">
-												<input class="form-check-input" name="checkboxes[]" type="checkbox" data-msg-required="Lütfen bir iletişim tercihi belirtiniz" id="inlineCheckbox1" value="option1"> Telefon
-											</label>
+											<input class="form-check-input" type="checkbox" name="iletisim_tercihi[]" id="prefTel"  value="Telefon">
+											<label class="form-check-label" for="prefTel">Telefon</label>
 										</div>
+
 										<div class="form-check form-check-inline">
-											<label class="form-check-label">
-												<input class="form-check-input" name="checkboxes[]" type="checkbox" data-msg-required="Lütfen bir iletişim tercihi belirtiniz" id="inlineCheckbox1" value="option2"> Email
-											</label>
+											<input class="form-check-input" type="checkbox" name="iletisim_tercihi[]" id="prefMail" value="E-posta">
+											<label class="form-check-label" for="prefMail">E-posta</label>
 										</div>
+
 										<div class="form-check form-check-inline">
-											<label class="form-check-label">
-												<input class="form-check-input" name="checkboxes[]" type="checkbox" data-msg-required="Lütfen bir iletişim tercihi belirtiniz" id="inlineCheckbox1" value="option3"> Hiçbiri
-											</label>
+											<input class="form-check-input" type="checkbox" name="iletisim_tercihi[]" id="prefNone" value="Hiçbiri">
+											<label class="form-check-label" for="prefNone">Hiçbiri</label>
 										</div>
 									</div>
+
                                     <!-- <div class="row">
                                         <div class="form-group col">
                                             <label class="form-label mb-1 text-2">Konu</label>
@@ -319,7 +330,7 @@
                                     <div class="row">
                                         <div class="form-group col">
                                             <label class="form-label mb-1 text-2">Mesajınız</label>
-                                            <textarea maxlength="5000" data-msg-required="Lütfen Mesajınızı Giriniz" rows="5" class="form-control text-3 h-auto py-2" name="message" required></textarea>
+                                            <textarea maxlength="5000" data-msg-required="Lütfen Mesajınızı Giriniz" rows="5" class="form-control text-3 h-auto py-2" name="message" placeholder="Bize iletmek istediğiniz mesajı yazın" required></textarea>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -327,6 +338,7 @@
                                             <input type="submit" value="Gönder" class="btn btn-primary btn-modern" data-loading-text="Gönderiliyor...">
                                         </div>
                                     </div>
+									<input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                                 </form>
 
                             </div>
@@ -440,9 +452,10 @@
 		<!-- Theme Initialization Files -->
 		<script src="js/theme.init.js"></script>
 
-	    <script id="google-recaptcha-v3" src="https://www.google.com/recaptcha/api.js?render=6LdHFIQqAAAAAKPZrefaWOf1x_1aQgD6ap3JHiWw"></script>
-		<!-- Google Maps -->
+	    <script id="google-recaptcha-v3" src="https://www.google.com/recaptcha/api.js?render=6LcymLsrAAAAADaJAogI3oI7nxtDqi2FCkkr2ZC4"></script>
 		
+		
+		<!-- Google Maps -->
 		<script>
 
 			/* 

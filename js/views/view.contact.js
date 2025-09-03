@@ -1,9 +1,3 @@
-/*
-Name: 			View - Contact
-Written by: 	Okler Themes - (http://www.okler.net)
-Theme Version:	12.0.0
-*/
-
 (($ => {
     /*
 	Custom Rules
@@ -163,100 +157,100 @@ Theme Version:	12.0.0
     /*
 	Contact Form: reCaptcha v3
 	*/
-    $('.contact-form-recaptcha-v3').each(function(){
-		$(this).validate({
-			errorPlacement(error, element) {
-				if(element.attr('type') == 'radio' || element.attr('type') == 'checkbox') {
-					error.appendTo(element.closest('.form-group'));
-				} else if( element.is('select') && element.closest('.custom-select-1') ) {
-					error.appendTo(element.closest('.form-group'));
-				} else {
-					error.insertAfter(element);
-				}
-			},
-			submitHandler(form) {
+	$('.contact-form-recaptcha-v3').each(function(){
+	$(this).validate({
+		errorPlacement(error, element) {
+		if(element.attr('type') == 'radio' || element.attr('type') == 'checkbox') {
+			error.appendTo(element.closest('.form-group'));
+		} else if( element.is('select') && element.closest('.custom-select-1') ) {
+			error.appendTo(element.closest('.form-group'));
+		} else {
+			error.insertAfter(element);
+		}
+		},
+		submitHandler(form) {
 
-				const $form = $(form), $messageSuccess = $form.find('.contact-form-success'), $messageError = $form.find('.contact-form-error'), $submitButton = $(this.submitButton), $errorMessage = $form.find('.mail-error-message'), submitButtonText = $submitButton.val();
+		const $form = $(form),
+				$messageSuccess = $form.find('.contact-form-success'),
+				$messageError   = $form.find('.contact-form-error'),
+				$submitButton   = $(this.submitButton),
+				$errorMessage   = $form.find('.mail-error-message'),
+				submitButtonText= $submitButton.val();
 
-				$submitButton.val( $submitButton.data('loading-text') ? $submitButton.data('loading-text') : 'Loading...' ).attr('disabled', true);
+		$submitButton.val( $submitButton.data('loading-text') ? $submitButton.data('loading-text') : 'Loading...' ).attr('disabled', true);
 
-				const recaptchaSrcURL = $('#google-recaptcha-v3').attr('src'), newURL          = new URL(recaptchaSrcURL), site_key        = newURL.searchParams.get("render");
+		const recaptchaSrcURL = $('#google-recaptcha-v3').attr('src'),
+				newURL           = new URL(recaptchaSrcURL),
+				site_key         = newURL.searchParams.get("render");
 
-				grecaptcha.execute(site_key, {action: 'contact_us'}).then(token => {
+		grecaptcha.execute(site_key, {action: 'contact_us'}).then(token => {
 
-					// Fields Data
-					const formData = $form.serializeArray(), data = {};
-
-					$(formData).each((index, {name, value}) => {
-					    data[name] = value;
-					});
-
-					// Recaptcha v3 Token
-					data["g-recaptcha-response"] = token;
-
-					// Ajax Submit
-					$.ajax({
-						type: 'POST',
-						url: $form.attr('action'),
-						data
-					}).always(({response, errorMessage, responseText}, textStatus, jqXHR) => {
-
-						$errorMessage.empty().hide();
-
-						if (response == 'success') {
-
-							// Uncomment the code below to redirect for a thank you page
-							// self.location = 'thank-you.html';
-
-							$messageSuccess.removeClass('d-none');
-							$messageError.addClass('d-none');
-
-							// Reset Form
-							$form.find('.form-control')
-								.val('')
-								.blur()
-								.parent()
-								.removeClass('has-success')
-								.removeClass('has-danger')
-								.find('label.error')
-								.remove();
-
-							if (($messageSuccess.offset().top - 80) < $(window).scrollTop()) {
-								$('html, body').animate({
-									scrollTop: $messageSuccess.offset().top - 80
-								}, 300);
-							}
-
-							$form.find('.form-control').removeClass('error');
-
-							$submitButton.val( submitButtonText ).attr('disabled', false);
-							
-							return;
-
-						} else if (response == 'error' && typeof errorMessage !== 'undefined') {
-							$errorMessage.html(errorMessage).show();
-						} else {
-							$errorMessage.html(responseText).show();
-						}
-
-						$messageError.removeClass('d-none');
-						$messageSuccess.addClass('d-none');
-
-						if (($messageError.offset().top - 80) < $(window).scrollTop()) {
-							$('html, body').animate({
-								scrollTop: $messageError.offset().top - 80
-							}, 300);
-						}
-
-						$form.find('.has-success')
-							.removeClass('has-success');
-							
-						$submitButton.val( submitButtonText ).attr('disabled', false);
-
-					});
-
-				});
+			// 1) Fields Data (aynı isimli alanları birleştir)
+			const formData = $form.serializeArray(), data = {};
+			$(formData).each((index, {name, value}) => {
+			if (data[name]) {
+				data[name] = data[name] + ', ' + value;   // <-- çoklu checkbox’ları CSV yap
+			} else {
+				data[name] = value;
 			}
+			});
+
+			// 2) Ek güvence: checkboxları ayrıca joined alana yaz
+			const selected = Array.from(document.querySelectorAll('input[name="iletisim_tercihi[]"]:checked')).map(el => el.value);
+			data['iletisim_tercihi_joined'] = selected.join(', ');
+
+			// 3) Recaptcha v3 Token
+			data["g-recaptcha-response"] = token;
+
+			// 4) Ajax Submit
+			$.ajax({
+			type: 'POST',
+			url: $form.attr('action'),
+			data
+			}).always(({response, errorMessage, responseText}, textStatus, jqXHR) => {
+
+			$errorMessage.empty().hide();
+
+			if (response == 'success') {
+				$messageSuccess.removeClass('d-none');
+				$messageError.addClass('d-none');
+
+				$form.find('.form-control')
+				.val('')
+				.blur()
+				.parent()
+				.removeClass('has-success has-danger')
+				.find('label.error').remove();
+
+				if (($messageSuccess.offset().top - 80) < $(window).scrollTop()) {
+				$('html, body').animate({ scrollTop: $messageSuccess.offset().top - 80 }, 300);
+				}
+
+				$form.find('.form-control').removeClass('error');
+				$submitButton.val( submitButtonText ).attr('disabled', false);
+				return;
+
+			} else if (response == 'error' && typeof errorMessage !== 'undefined') {
+				$errorMessage.html(errorMessage).show();
+			} else {
+				$errorMessage.html(responseText).show();
+			}
+
+			$messageError.removeClass('d-none');
+			$messageSuccess.addClass('d-none');
+
+			if (($messageError.offset().top - 80) < $(window).scrollTop()) {
+				$('html, body').animate({ scrollTop: $messageError.offset().top - 80 }, 300);
+			}
+
+			$form.find('.has-success').removeClass('has-success');
+			$submitButton.val( submitButtonText ).attr('disabled', false);
+
+			});
+
 		});
+		}
 	});
+	});
+
 })).apply(this, [jQuery]);

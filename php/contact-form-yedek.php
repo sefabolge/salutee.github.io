@@ -14,12 +14,12 @@ require 'php-mailer/src/SMTP.php';
 require 'php-mailer/src/Exception.php';
 
 /* ====== CONFIG ====== */
-$recipientEmail = 'email';       // Başvurular buraya gelsin
-$smtpHost       = 'host, mail.site.com';
-$smtpUser       = 'email';
-$smtpPass       = 'sifre';
-$smtpPort       = 465;                    // 465/SSL
-$smtpSecure     = PHPMailer::ENCRYPTION_SMTPS;   
+$recipientEmail = 'sefa@loadingsoft.com';       // Başvurular buraya gelsin
+$smtpHost       = 'mail.loadingsoft.com';
+$smtpUser       = 'sefa@loadingsoft.com';
+$smtpPass       = 'Sail@away!1122';
+$smtpPort       = 465;
+$smtpSecure     = PHPMailer::ENCRYPTION_SMTPS;   // 465/SSL
 $debug          = 0;
 
 $secret         = '6LcymLsrAAAAAJgToeMrUyvt25XtuKH9YGE16eWz';    // reCAPTCHA v3 secret
